@@ -1,14 +1,13 @@
 const express = require("express");
+const defaultRoutes = require("./Routes/default");
+
 const app = express();
 
 //! type of data
 //! naun
 //! adj
 
-app.get("/?q=3", (req, res) => {
-  //? 1
-  res.send({ name1: "Soft", name2: "warm", name3: "Kitty" });
-});
+app.use("/", defaultRoutes);
 
 app.get("/noun", (req, res) => {
   //? 2
