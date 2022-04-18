@@ -1,4 +1,6 @@
 const express = require("express");
+const sequelize = require("./database");
+const Nouns = require("./Models/nouns");
 const defaultRoutes = require("./Routes/default");
 
 const app = express();
@@ -6,6 +8,16 @@ const app = express();
 //! type of data
 //! naun
 //! adj
+
+//? initialize the database
+sequelize
+  .sync({ force: true })
+  .then(async () => {
+    await Nouns.create({ name: "pen", emoji: "🖋️" });
+
+    console.log("db sync");
+  })
+  .catch((err) => console.log(err));
 
 app.use("/", defaultRoutes);
 
