@@ -1,6 +1,3 @@
-const express = require("express");
-const app = express();
-
 const getAll = (req, res) => {
   //? 1
   const nouns = ["chockolate", "glass", "Cat", "Pen", "pillow"];
