@@ -1,5 +1,6 @@
 const express = require("express");
 const sequelize = require("./database");
+const Adjectives = require("./Models/adjective");
 const Nouns = require("./Models/nouns");
 const defaultRoutes = require("./Routes/default");
 
@@ -14,6 +15,7 @@ sequelize
   .sync({ force: true })
   .then(async () => {
     await Nouns.create({ name: "pen", emoji: "🖋️" });
+    await Adjectives.create({ name: "blue"});
 
     console.log("db sync");
   })
