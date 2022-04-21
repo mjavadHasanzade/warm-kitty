@@ -3,6 +3,8 @@ const sequelize = require("./database");
 const Adjectives = require("./Models/adjective");
 const Nouns = require("./Models/nouns");
 const defaultRoutes = require("./Routes/default");
+const nounsRoutes = require("./Routes/nouns");
+var bodyParser = require("body-parser");
 
 const app = express();
 
@@ -15,33 +17,22 @@ sequelize
   .sync({ force: true })
   .then(async () => {
     await Nouns.create({ name: "pen", emoji: "🖋️" });
-    await Adjectives.create({ name: "blue", type: "color"});
+    await Adjectives.create({ name: "blue", type: "color" });
 
     console.log("db sync");
   })
   .catch((err) => console.log(err));
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
+app.use(express.json());
+
 app.use("/", defaultRoutes);
-
-app.get("/noun", (req, res) => {
-  //? 2
-  res.send({ name1: "Soft", name2: "warm", name3: "Kitty" });
-});
-
-app.post("/noun", (req, res) => {
-  //? 3
-  res.send({ name1: "Soft", name2: "Kitty" });
-});
-
-app.put("/noun", (req, res) => {
-  //? 4
-  res.send({ name1: "Soft", name2: "Kitty" });
-});
-
-app.delete("/noun", (req, res) => {
-  //? 5
-  res.send({ name1: "Soft", name2: "Kitty" });
-});
+app.use("/nouns", nounsRoutes);
 
 app.get("/adj", (req, res) => {
   //? 6
