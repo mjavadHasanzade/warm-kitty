@@ -15,7 +15,7 @@ sequelize
   .sync({ force: true })
   .then(async () => {
     await Nouns.create({ name: "pen", emoji: "🖋️" });
-    await Adjectives.create({ name: "blue"});
+    await Adjectives.create({ name: "blue", type: "color"});
 
     console.log("db sync");
   })

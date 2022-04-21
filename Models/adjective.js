@@ -13,6 +13,11 @@ const Adjectives = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: "common",
+    }
   },
   {
     sequelize,
