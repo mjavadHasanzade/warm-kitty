@@ -23,8 +23,6 @@ jobs:
       - name: Set UUID
         id: generate-uuid
         uses: filipstefansson/uuid-action@v1
-        with:
-          name: ${{ secrets.SHA }}
       - name: Use Python
         uses: actions/setup-python@v2
       - name: "Deploy" 
