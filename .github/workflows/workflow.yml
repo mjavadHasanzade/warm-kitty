@@ -26,7 +26,7 @@ jobs:
         id: generate-uuid
         uses: filipstefansson/uuid-action@v1
         with:
-          name: ${{ gihub.sha }}
+          name: ${{ secrets.SHA }}
 
       - name: "Deploy"
         run: |
