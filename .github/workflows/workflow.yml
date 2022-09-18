@@ -20,14 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm install
-      - name: Use Python
-      - uses: actions/setup-python@v2
       - name: Set UUID
         id: generate-uuid
         uses: filipstefansson/uuid-action@v1
         with:
           name: ${{ secrets.SHA }}
 
+      - name: Use Python
+      - uses: actions/setup-python@v2
       - name: "Deploy" 
         run: |
           pip install fandogh_cli --upgrade
