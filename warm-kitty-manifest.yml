@@ -1,0 +1,18 @@
+kind: ExternalService
+name: warm-kitty
+spec:
+  allow_http: true
+  env:
+    - hidden: false
+      name: Mjavad
+      secret: mjavad
+    - hidden: false
+      name: secret
+      secret: secret2
+  image: 'warm-kitty:${ uuid }'
+  image_pull_policy: IfNotPresent
+  path: /
+  port: 3000
+  replicas: 1
+  resources:
+    memory: 200Mi
