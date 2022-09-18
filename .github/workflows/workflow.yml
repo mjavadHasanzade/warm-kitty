@@ -31,4 +31,4 @@ jobs:
           COLLECT_ERROR=True fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
           fandogh namespace active --name mjavad
           fandogh image publish --version ${{ steps.generate-uuid.outputs.uuid }}
-          fandogh service apply -f warm-kitty-manifest.yml -p uuid=${{ steps.generate-uuid.outputs.uuid }}
+          fandogh service apply -f warm-kitty-manifest.yml -p IMAGE_ID=${{ steps.generate-uuid.outputs.uuid }}

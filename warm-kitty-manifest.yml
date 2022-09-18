@@ -9,7 +9,7 @@ spec:
     - hidden: false
       name: secret
       secret: secret2
-  image: 'warm-kitty:${ uuid }'
+  image: 'warm-kitty:${IMAGE_ID}'
   image_pull_policy: IfNotPresent
   path: /
   port: 3000
