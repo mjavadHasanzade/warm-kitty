@@ -28,7 +28,7 @@ jobs:
         with:
           name: ${{ secrets.SHA }}
 
-      - name: "Deploy"
+      - name: "Deploy" 
         run: |
           pip install fandogh_cli --upgrade
           COLLECT_ERROR=True fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
