@@ -25,9 +25,8 @@ jobs:
         uses: filipstefansson/uuid-action@v1
         with:
           name: ${{ secrets.SHA }}
-
       - name: Use Python
-      - uses: actions/setup-python@v2
+        uses: actions/setup-python@v2
       - name: "Deploy" 
         run: |
           pip install fandogh_cli --upgrade
