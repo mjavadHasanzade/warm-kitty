@@ -4,6 +4,7 @@ const Adjectives = require("./Models/adjective");
 const Nouns = require("./Models/nouns");
 const defaultRoutes = require("./Routes/default");
 const nounsRoutes = require("./Routes/nouns");
+const adjectiveRoutes = require("./Routes/adjective");
 var bodyParser = require("body-parser");
 
 const app = express();
@@ -45,26 +46,7 @@ app.use(express.json());
 
 app.use("/", defaultRoutes);
 app.use("/nouns", nounsRoutes);
-
-app.get("/adj", (req, res) => {
-  //? 6
-  res.send({ name1: "Soft", name2: "warm", name3: "Kitty" });
-});
-
-app.post("/adj", (req, res) => {
-  //? 7
-  res.send({ name1: "Soft", name2: "Kitty" });
-});
-
-app.put("/adj", (req, res) => {
-  //? 8
-  res.send({ name1: "Soft", name2: "Kitty" });
-});
-
-app.delete("/adj", (req, res) => {
-  //? 9
-  res.send({ name1: "Soft", name2: "Kitty" });
-});
+app.use("/adj", adjectiveRoutes);
 
 app.listen(3000, () => {
   console.log("server is listeing to port http:localhost:3000");
