@@ -1,34 +1,19 @@
-name: Kitty Deploy
-
+name: Build
 on:
   push:
     branches:
       - master
-  
-  workflow_dispatch:
-
-  repository_dispatch:
-    types: [workflow]
 
 jobs:
   build:
-    name: "Build"
+    name: "Deploy to Liara"
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [15.x]
     steps:
-      - uses: actions/checkout@v1
-      - run: npm install
-      - name: Set UUID
-        id: generate-uuid
-        uses: filipstefansson/uuid-action@v1
-      - name: Use Python
-        uses: actions/setup-python@v2
-      - name: "Deploy" 
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "18"
+      - name: "Deploy"
         run: |
-          pip install fandogh_cli --upgrade
-          COLLECT_ERROR=True fandogh login --username ${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }}
-          fandogh namespace active --name mjavad
-          fandogh image publish --version ${{ steps.generate-uuid.outputs.uuid }}
-          fandogh service apply -f warm-kitty-manifest.yml -p IMAGE_ID=${{ steps.generate-uuid.outputs.uuid }}
+          npm i -g @liara/cli@2
+          liara deploy --api-token="${{ secrets.LIARA_TOKEN }}" --region iran --detach
