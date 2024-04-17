@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 const routes = [
   {
-    name: "/name",
+    name: "/",
     action: randomName,
   },
 ];
