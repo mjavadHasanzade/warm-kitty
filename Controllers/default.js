@@ -1,14 +1,26 @@
-const getAll = (req, res) => {
-  //? 1
-  const nouns = ["chockolate", "glass", "Cat", "Pen", "pillow"];
-  const adj = ["warm", "scary", "Blue", "funny", "salty"];
+const sequelize = require("sequelize");
+const Adjectives = require("../Models/adjective");
+const Nouns = require("../Models/nouns");
+
+const randomName = async (req, res) => {
+
+  const adj = await Adjectives.findOne({
+    attributes: ["name", "type"],
+    order: sequelize.literal("random()"),
+  });
+
+  const noun = await Nouns.findOne({
+    attributes: ["name", "emoji"],
+    order: sequelize.literal("random()"),
+  });
 
   res.send({
-    name0: process.env.Mjavad,
-    name1: adj[Math.ceil(Math.random() * adj.length - 1)],
-    name2: nouns[Math.ceil(Math.random() * nouns.length - 1)],
-    name4: new Date().getTime()
+    adj: adj.name,
+    noun: noun.name,
+    full: adj.name + " " + noun.name,
+    emoji: noun.emoji,
+    timestamp: new Date().getTime(),
   });
 };
 
-module.exports = { getAll };
+module.exports = { randomName };

@@ -16,8 +16,20 @@ const app = express();
 sequelize
   .sync({ force: true })
   .then(async () => {
-    await Nouns.create({ name: "pen", emoji: "🖋️" });
-    await Adjectives.create({ name: "blue", type: "color" });
+    await Nouns.bulkCreate([
+      { name: "chockolate", emoji: "🍫" },
+      { name: "glass", emoji: "🍷" },
+      { name: "Cat", emoji: "🐈" },
+      { name: "Pen", emoji: "🖊️" },
+      { name: "pillow", emoji: "💩" },
+    ]);
+    await Adjectives.bulkCreate([
+      { name: "warm", type: "any" },
+      { name: "scary", type: "any" },
+      { name: "Blue", type: "any" },
+      { name: "funny", type: "any" },
+      { name: "salty", type: "any" },
+    ]);
 
     console.log("db sync");
   })
@@ -55,5 +67,5 @@ app.delete("/adj", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("server is listeing to port 3000");
+  console.log("server is listeing to port http:localhost:3000");
 });

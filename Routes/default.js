@@ -1,6 +1,15 @@
-const { getAll } = require("../Controllers/default");
+const { randomName } = require("../Controllers/default");
 const router = require("express").Router();
 
-router.get("/", getAll);
+const routes = [
+  {
+    name: "/name",
+    action: randomName,
+  },
+];
+
+routes.map((route) => {
+  router.get(route.name, route.action);
+});
 
 module.exports = router;
