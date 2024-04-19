@@ -6,7 +6,6 @@ import defaultRoutes from "./Routes/default";
 import nounsRoutes from "./Routes/nouns";
 import adjectiveRoutes from "./Routes/adjective";
 import qaRoutes from "./Routes/fakeQA";
-import bodyParser from "body-parser";
 import FakeQA from "./Models/fakeQA";
 import { nouns, adjs, qas } from "./mock";
 

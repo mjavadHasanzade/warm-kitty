@@ -16,6 +16,7 @@ jobs:
       - name: "Deploy"
         run: |
           npm i -g @liara/cli@2
+          npm install typescript
           npm run build
           cd ./dist
           liara deploy --api-token="${{ secrets.LIARA_TOKEN }}" --region iran --detach
