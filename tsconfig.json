@@ -21,7 +21,8 @@
   },
   "include": [
     "./**/*",
-    "./liara.json"
+    "./liara.json",
+    "./package*.json"
   ],
   "exclude": [
     "/node_modules/**/*"
