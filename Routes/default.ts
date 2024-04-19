@@ -1,6 +1,7 @@
-const { randomName, randomQA } = require("../Controllers/default");
-const router = require("express").Router();
+import { randomName, randomQA } from "../Controllers/default";
+import { Router } from "express";
 
+const router = Router();
 const routes = [
   {
     name: "/",
@@ -24,4 +25,4 @@ routes.map((route) => {
   router.get(route.name, route.action);
 });
 
-module.exports = router;
+export default router;

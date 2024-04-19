@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
+import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize("warm-kitty", "user", "pass", {
   dialect: "sqlite",
   host: "./resources/dev.sqlite",
 });
 
-module.exports = sequelize;
+export default sequelize;

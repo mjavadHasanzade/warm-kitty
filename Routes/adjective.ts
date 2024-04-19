@@ -1,14 +1,16 @@
-const {
+import {
   getAll,
   createOne,
   editOne,
   deleteOne,
-} = require("../Controllers/nouns");
-const router = require("express").Router();
+} from "../Controllers/adjective";
+import { Router } from "express";
+
+const router = Router();
 
 router.get("/", getAll);
 router.post("/", createOne);
 router.put("/:id", editOne);
 router.delete("/:id", deleteOne);
 
-module.exports = router;
+export default router;

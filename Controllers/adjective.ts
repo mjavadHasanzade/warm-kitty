@@ -1,11 +1,12 @@
-const Adj = require("../Models/adjective");
+import Adj from "../Models/adjective";
+import { Request, Response } from "express";
 
-const getAll = async (req, res) => {
+const getAll = async (req: Request, res: Response) => {
   const adj = await Adj.findAndCountAll();
   res.send({ adj });
 };
 
-const createOne = async (req, res) => {
+const createOne = async (req: Request, res: Response) => {
   const body = req.body;
 
   try {
@@ -17,7 +18,7 @@ const createOne = async (req, res) => {
   }
 };
 
-const editOne = async (req, res) => {
+const editOne = async (req: Request, res: Response) => {
   const body = req.body;
 
   try {
@@ -36,7 +37,7 @@ const editOne = async (req, res) => {
   }
 };
 
-const deleteOne = async (req, res) => {
+const deleteOne = async (req: Request, res: Response) => {
   try {
     await Adj.destroy({
       where: { id: req.params.id },
@@ -47,4 +48,4 @@ const deleteOne = async (req, res) => {
   }
 };
 
-module.exports = { getAll, createOne, editOne, deleteOne };
+export { getAll, createOne, editOne, deleteOne };

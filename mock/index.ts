@@ -69,4 +69,4 @@ const qas = [
   },
 ];
 
-module.exports = { nouns, adjs, qas };
+export { nouns, adjs, qas };

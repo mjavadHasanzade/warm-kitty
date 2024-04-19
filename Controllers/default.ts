@@ -1,9 +1,10 @@
-const sequelize = require("sequelize");
-const Adjectives = require("../Models/adjective");
-const Nouns = require("../Models/nouns");
-const FakeQA = require("../Models/fakeQA");
+import Adjectives from "../Models/adjective";
+import Nouns from "../Models/nouns";
+import FakeQA from "../Models/fakeQA";
+import { Request, Response } from "express";
+import sequelize from "../database";
 
-const randomName = async (req, res) => {
+const randomName = async (req: Request, res: Response) => {
   const adj = await Adjectives.findOne({
     attributes: ["name", "type"],
     order: sequelize.literal("random()"),
@@ -23,7 +24,7 @@ const randomName = async (req, res) => {
   });
 };
 
-const randomQA = async (req, res) => {
+const randomQA = async (req: Request, res: Response) => {
   console.log(req.originalUrl);
 
   const attributes = [];
@@ -43,4 +44,4 @@ const randomQA = async (req, res) => {
   });
 };
 
-module.exports = { randomName, randomQA };
+export  { randomName, randomQA };
