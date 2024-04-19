@@ -12,8 +12,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "18"
+          node-version: "20"
       - name: "Deploy"
         run: |
           npm i -g @liara/cli@2
+          cd ./dist
           liara deploy --api-token="${{ secrets.LIARA_TOKEN }}" --region iran --detach
