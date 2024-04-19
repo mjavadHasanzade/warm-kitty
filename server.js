@@ -22,7 +22,6 @@ sequelize
   .then(async () => {
     await Nouns.bulkCreate(nouns);
     await Adjectives.bulkCreate(adjs);
-
     await FakeQA.bulkCreate(qas);
 
     console.log("db sync");
