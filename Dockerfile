@@ -9,17 +9,6 @@ COPY . .
 
 RUN yarn build
 
-FROM node:slim
 
-ENV NODE_ENV production
-USER node
-
-# Install app dependencies
-COPY package*.json ./
-
-RUN yarn
-
-COPY --from=builder ./dist ./dist
-
-EXPOSE 8080
+EXPOSE 3000
 CMD [ "node", "dist/server.js" ]
