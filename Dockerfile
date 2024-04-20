@@ -3,11 +3,11 @@ FROM node as builder
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm ci
+RUN yarn
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 FROM node:slim
 
@@ -17,9 +17,9 @@ USER node
 # Install app dependencies
 COPY package*.json ./
 
-RUN npm ci --production
+RUN yarn
 
 COPY --from=builder ./dist ./dist
 
 EXPOSE 8080
-CMD [ "node", "dist/index.js" ]
+CMD [ "node", "dist/server.js" ]
