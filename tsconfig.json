@@ -22,7 +22,7 @@
   "include": [
     "./**/*",
     "./liara.json",
-    "./package*.json"
+    "./package.json"
   ],
   "exclude": [
     "/node_modules/**/*"
