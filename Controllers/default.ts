@@ -28,7 +28,7 @@ const randomName = async (req: Request, res: Response) => {
   res.send({
     adj: adj.name,
     noun: noun.name,
-    full: adj.name + " " + noun.name,
+    full: req.language === 'en' ? adj.name + " " + noun.name : noun.name + " " + adj.name,
     emoji: noun.emoji,
     timestamp: new Date().getTime(),
   });
