@@ -8,12 +8,22 @@ const randomName = async (req: Request, res: Response) => {
   const adj = await Adjectives.findOne({
     attributes: ["name", "type"],
     order: sequelize.literal("random()"),
+    where: { lang: req.language }
   });
 
   const noun = await Nouns.findOne({
     attributes: ["name", "emoji"],
     order: sequelize.literal("random()"),
+    where: { lang: req.language }
   });
+
+
+  if (!adj || !noun) {
+    res.send({
+      timestamp: new Date().getTime(),
+    });
+    return;
+  }
 
   res.send({
     adj: adj.name,
@@ -25,17 +35,25 @@ const randomName = async (req: Request, res: Response) => {
 };
 
 const randomQA = async (req: Request, res: Response) => {
-  console.log(req.originalUrl);
+  console.log(req.path);
 
   const attributes = [];
-  if (req.originalUrl === "/question") attributes.push("question");
-  else if (req.originalUrl === "/answer") attributes.push("answer");
-  else if (req.originalUrl === "/qa") attributes.push("question", "answer");
+  if (req.path === "/question") attributes.push("question");
+  else if (req.path === "/answer") attributes.push("answer");
+  else if (req.path === "/qa") attributes.push("question", "answer");
 
   const qa = await FakeQA.findOne({
     attributes,
     order: sequelize.literal("random()"),
+    where: { lang: req.language }
   });
+
+  if (!qa) {
+    res.send({
+      timestamp: new Date().getTime(),
+    });
+    return;
+  }
 
   res.send({
     question: qa.question,
@@ -44,4 +62,4 @@ const randomQA = async (req: Request, res: Response) => {
   });
 };
 
-export  { randomName, randomQA };
+export { randomName, randomQA };

@@ -6,6 +6,7 @@ interface NounAttributes {
   id: number;
   name: string;
   emoji: string;
+  lang: string;
 };
 
 interface NounCreationAttributes
@@ -34,6 +35,11 @@ const Nouns = sequelize.define<NounInstance>(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    lang: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "en",
+    }
   },
 
 );

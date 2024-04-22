@@ -2,7 +2,7 @@ import Adj from "../Models/adjective";
 import { Request, Response } from "express";
 
 const getAll = async (req: Request, res: Response) => {
-  const adj = await Adj.findAndCountAll();
+  const adj = await Adj.findAndCountAll({ where: { lang: req.language } });
   res.send({ adj });
 };
 
@@ -10,7 +10,7 @@ const createOne = async (req: Request, res: Response) => {
   const body = req.body;
 
   try {
-    const newAdj = await Adj.create(body);
+    const newAdj = await Adj.create({ ...body, lang: req.language });
 
     res.send({ newAdj, message: "Adj Created Successfully" });
   } catch (error) {

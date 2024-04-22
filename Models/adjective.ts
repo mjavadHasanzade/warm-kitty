@@ -5,6 +5,7 @@ interface AdjectivesAttributes {
   id: number;
   name: string;
   type?: string;
+  lang?: string;
 }
 
 interface AdjectivesCreationAttributes
@@ -14,7 +15,7 @@ interface AdjectivesInstance
   extends Model<AdjectivesAttributes, AdjectivesCreationAttributes>,
   AdjectivesAttributes {
   createdAt?: Date;
-  updatedAt?: Date;
+  updatedAt: Date;
 }
 
 const Adjectives = sequelize.define<AdjectivesInstance>(
@@ -34,6 +35,11 @@ const Adjectives = sequelize.define<AdjectivesInstance>(
       allowNull: true,
       defaultValue: "common",
     },
+    lang: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "en",
+    }
   }
 );
 

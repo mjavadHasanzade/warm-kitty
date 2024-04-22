@@ -8,12 +8,15 @@ import adjectiveRoutes from "./Routes/adjective";
 import qaRoutes from "./Routes/fakeQA";
 import FakeQA from "./Models/fakeQA";
 import { nouns, adjs, qas } from "./mock";
+import { Request, Response } from "express";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    language?: string;
+  }
+}
 
 const app = express();
-
-//! type of data
-//! naun
-//! adj
 
 //? initialize the database
 sequelize
@@ -27,12 +30,24 @@ sequelize
   })
   .catch((err: any) => console.log(err));
 
-  app.use(express.json());
+app.use(express.json());
 
+
+
+const middleware = (req: Request, res: Response, next: express.NextFunction) => {
+  if (req.query.lang == "en" || req.query.lang == "fa")
+    req.language = req.query.lang;
+  else
+    req.language = "fa"
+  next();
+}
+
+app.use("*", middleware);
 app.use("/", defaultRoutes);
 app.use("/nouns", nounsRoutes);
-app.use("/adj", adjectiveRoutes);
+app.use("/adjs", adjectiveRoutes);
 app.use("/qas", qaRoutes);
+
 
 app.listen(3000, () => {
   console.log("server is listeing to port http:localhost:3000");

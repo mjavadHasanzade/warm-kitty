@@ -2,7 +2,7 @@ import Nouns from "../Models/nouns";
 import { Request, Response } from "express"
 
 const getAll = async (req: Request, res: Response) => {
-  const nouns = await Nouns.findAndCountAll();
+  const nouns = await Nouns.findAndCountAll({ where: { lang: req.language } });
   res.send({ nouns });
 };
 
@@ -10,7 +10,7 @@ const createOne = async (req: Request, res: Response) => {
   const body = req.body;
 
   try {
-    const newNoun = await Nouns.create(body);
+    const newNoun = await Nouns.create({ ...body, lang: req.language });
 
     res.send({ newNoun, message: "Noun Created Successfully" });
   } catch (error) {

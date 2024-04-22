@@ -2,7 +2,7 @@ import FakeQA from "../Models/fakeQA";
 import { Request, Response } from "express";
 
 const getAll = async (req: Request, res: Response) => {
-  const fakeQAs = await FakeQA.findAndCountAll();
+  const fakeQAs = await FakeQA.findAndCountAll({ where: { lang: req.language } });
   res.send({ fakeQAs });
 };
 
@@ -10,7 +10,7 @@ const createOne = async (req: Request, res: Response) => {
   const body = req.body;
 
   try {
-    const newFakeQA = await FakeQA.create(body);
+    const newFakeQA = await FakeQA.create({ ...body, lang: req.language });
 
     res.send({ newFakeQA, message: "FakeQA Created Successfully" });
   } catch (error) {

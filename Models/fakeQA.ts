@@ -6,6 +6,7 @@ interface FakeQAAttributes {
   id: number;
   question: string;
   answer: string;
+  lang: string;
 };
 
 interface FakeQACreationAttributes
@@ -35,10 +36,11 @@ const FakeQA = sequelize.define<FakeQAInstance>(
       allowNull: false,
       defaultValue: "common",
     },
-  },
-  {
-    // @ts-ignore
-    sequelize,
+    lang: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "en",
+    }
   }
 );
 
