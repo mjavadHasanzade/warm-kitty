@@ -11,6 +11,7 @@ import { nouns, adjs, qas } from "./mock";
 import { Request, Response, ErrorRequestHandler } from "express";
 import { DatabaseError, ValidationError } from "./errors";
 import { lookup } from "geoip-lite";
+import * as cors from "cors";
 
 declare module "express-serve-static-core" {
   interface Request {
@@ -32,14 +33,14 @@ sequelize
   })
   .catch((err: any) => console.log(err));
 
+app.use(cors());
 app.use(express.json());
 
 const langHandler = (req: Request, res: Response, next: express.NextFunction) => {
   if (req.query.lang == "en" || req.query.lang == "fa")
     req.language = req.query.lang;
   else
-    req.language = "fa"
-  // throw new ValidationError("custom error")
+    req.language = "fa";
   next();
 }
 
